@@ -15,12 +15,14 @@ function App() {
       let newData;
       switch (searchTerm) {
         case "latest":
-          response = await axios.get("https://covid-19-data.now.sh/latest");
+          response = await axios.get("https://covid-19-rest-api.now.sh/latest");
           setData(response.data);
           setItems(response.data);
           break;
         case "confirmed":
-          response = await axios.get("https://covid-19-data.now.sh/confirmed");
+          response = await axios.get(
+            "https://covid-19-rest-api.now.sh/confirmed"
+          );
           newData = response.data.map((item, index) => {
             const array = Object.entries(item);
 
@@ -35,7 +37,7 @@ function App() {
           setItems(newData);
           break;
         case "deaths":
-          response = await axios.get("https://covid-19-data.now.sh/deaths");
+          response = await axios.get("https://covid-19-rest-api.now.sh/deaths");
           newData = response.data.map(item => {
             const array = Object.entries(item);
 
@@ -50,7 +52,9 @@ function App() {
           setItems(newData);
           break;
         case "recovered":
-          response = await axios.get("https://covid-19-data.now.sh/recovered");
+          response = await axios.get(
+            "https://covid-19-rest-api.now.sh/recovered"
+          );
           newData = response.data.map(item => {
             const array = Object.entries(item);
 
