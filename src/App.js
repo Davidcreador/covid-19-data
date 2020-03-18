@@ -4,7 +4,7 @@ import { Dot } from "react-animated-dots";
 
 import "./App.css";
 
-const API_URL = "${API_URL}";
+const API_URL = "https://covid-19-rest-api.now.sh";
 
 function App() {
   const [data, setData] = useState([]);
