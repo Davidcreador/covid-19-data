@@ -4,6 +4,8 @@ import { Dot } from "react-animated-dots";
 
 import "./App.css";
 
+const API_URL = "${API_URL}";
+
 function App() {
   const [data, setData] = useState([]);
   const [items, setItems] = useState([]);
@@ -15,14 +17,12 @@ function App() {
       let newData;
       switch (searchTerm) {
         case "latest":
-          response = await axios.get("https://covid-19-rest-api.now.sh/latest");
+          response = await axios.get(`${API_URL}/latest`);
           setData(response.data);
           setItems(response.data);
           break;
         case "confirmed":
-          response = await axios.get(
-            "https://covid-19-rest-api.now.sh/confirmed"
-          );
+          response = await axios.get(`${API_URL}/confirmed`);
           newData = response.data.map((item, index) => {
             const array = Object.entries(item);
 
@@ -37,7 +37,7 @@ function App() {
           setItems(newData);
           break;
         case "deaths":
-          response = await axios.get("https://covid-19-rest-api.now.sh/deaths");
+          response = await axios.get(`${API_URL}/deaths`);
           newData = response.data.map(item => {
             const array = Object.entries(item);
 
@@ -52,9 +52,7 @@ function App() {
           setItems(newData);
           break;
         case "recovered":
-          response = await axios.get(
-            "https://covid-19-rest-api.now.sh/recovered"
-          );
+          response = await axios.get(`${API_URL}/recovered`);
           newData = response.data.map(item => {
             const array = Object.entries(item);
 
