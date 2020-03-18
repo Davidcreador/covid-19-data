@@ -4,7 +4,28 @@ import { Dot } from "react-animated-dots";
 
 import "./App.css";
 
-const API_URL = "https://covid-19-rest-api.now.sh";
+const API_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:5000"
+    : "https://covid-19-rest-api.now.sh";
+console.log(process.env.NODE_ENV);
+function getTodayDateMMDDYYYY() {
+  let today = new Date();
+  let dd = today.getDate();
+
+  let mm = today.getMonth() + 1;
+  let yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+
+  today = mm + "-" + dd + "-" + yyyy;
+  return today;
+}
 
 function App() {
   const [data, setData] = useState([]);
@@ -17,7 +38,9 @@ function App() {
       let newData;
       switch (searchTerm) {
         case "latest":
-          response = await axios.get(`${API_URL}/latest`);
+          response = await axios.get(
+            `${API_URL}/latest?date=${getTodayDateMMDDYYYY()}`
+          );
           setData(response.data);
           setItems(response.data);
           break;
